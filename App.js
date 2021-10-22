@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Dimensions, ScrollView, FlatList } from "react-native";
 
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
@@ -22,6 +22,25 @@ export default function App() {
     "DSEG7Classic-Bold": require("./assets/fonts/DSEG7Classic-Bold.ttf")
   });
 
+  const userData = [
+    {id: "0", name: "手塚 朱里", icon: require("./assets/profileIcon_5.jpg"), comment: "失敬失敬", location: "東京都 青梅市", datetime: "18:10", cnt: "3"},
+    {id: "1", name: "高橋 周吾", icon: require("./assets/profileIcon_4.png"), comment: "ふざけたこと抜かしてんじゃねーぞボケ", location: "東京都 町田市", datetime: "14:00", cnt: "15"},
+    {id: "2", name: "天々座 理世", icon: require("./assets/profileIcon_3.jpg"), comment: "この私が断罪してくれる！", location: "東京都 清瀬市", datetime: "13:30", cnt: "130"},
+    {id: "3", name: "涼風 青葉", icon: require("./assets/profileIcon_2.jpg"), comment: "今日も一日がんばるぞい！", location: "神奈川県 藤沢市", datetime: "13:20", cnt: "95"},
+    {id: "4", name: "手塚 朱里", icon: require("./assets/profileIcon_5.jpg"), comment: "失敬失敬", location: "東京都 青梅市", datetime: "18:10", cnt: "3"},
+    {id: "5", name: "高橋 周吾", icon: require("./assets/profileIcon_4.png"), comment: "ふざけたこと抜かしてんじゃねーぞボケ", location: "東京都 町田市", datetime: "14:00", cnt: "15"},
+    {id: "6", name: "天々座 理世", icon: require("./assets/profileIcon_3.jpg"), comment: "この私が断罪してくれる！", location: "東京都 清瀬市", datetime: "13:30", cnt: "130"},
+    {id: "7", name: "涼風 青葉", icon: require("./assets/profileIcon_2.jpg"), comment: "今日も一日がんばるぞい！", location: "神奈川県 藤沢市", datetime: "13:20", cnt: "95"},
+  ]
+
+  const SNS = [
+    {id: "0", name: "Instagram", gradient: ["#eec35d", "#f7762b", "#d52a7b", "#9536b0", "#4f64d2"]},
+    {id: "2", name: "Twitter", gradient: ["#03dffc", "#1da1f2", "#0341fc", "#0703fc"]},
+    {id: "3", name: "TikTok", gradient: ["#fff", "#22f4ef", "#000", "#fe2a56", "#fff"]},
+    {id: "4", name: "Spotify", gradient: ["#c3fa37", "#1ccc5b"]},
+    {id: "5", name: "YouTube", gradient: ["#ff7e21", "#ff0000"]},
+  ]
+
   //フォントのロードが終了していたらコンポーネントを表示する
   if(!fontsLoaded){
     return null;
@@ -34,167 +53,59 @@ export default function App() {
                             <Avatar rounded source={require("./assets/profileIcon_1.jpg")} size={width * 0.1066} />                              
                           </View>}
         />
-      <View style={styles.body}>
-      <ScrollView>
 
-          <View style={styles.profileCard} onLayout={(e) => { setProfileCardSize({"height": e.nativeEvent.layout.height, "width": e.nativeEvent.layout.width}); }}>
-              <View style={styles.profileCardHeader}>
-                <View style={styles.profileCardHeaderLocation}>
-                  <Icon type="font-awesome-5" name="map-marker-alt" color="#757575" size={height * 0.022} containerStyle={{justifyContent: "center", alignItems: "stretch"}} />
-                  <Text style={styles.profileCardHeaderLocationText}>東京都 町田市</Text>
-                </View>
-                <Text style={styles.dseg}>16:24</Text>
-              </View>
-            <LinearGradient
-              colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
-              start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-              style={{ height: height * 0.004}}
-            />
-            <View style={{ marginTop: height * 0.007, paddingLeft: width * 0.0266, flexDirection: "row"}}>
-                  <View>
-                      <Avatar rounded source={require("./assets/profileIcon_4.png")} size={width * 0.18666} />
-                      <Badge value="6" containerStyle={{position: "relative", top: -10}} badgeStyle={{backgroundColor: "#ff8ab5"}} />
-                  </View>
-                  <View style={{marginLeft: width * 0.0266, paddingTop: height * 0.02244}}>
-                    <Text style={{fontFamily: "Kazesawa-Bold", fontSize: height * 0.0299}}>高橋 周吾</Text>
-                    <Text style={{fontFamily: "Kazesawa-Regular"}}>今日も一日がんばるぞい！</Text>
-                  </View>
-            </View>
-          </View>
-
-          <View style={styles.profileCard} onLayout={(e) => { setProfileCardSize({"height": e.nativeEvent.layout.height, "width": e.nativeEvent.layout.width}); }}>
-              <View style={styles.profileCardHeader}>
-                <View style={styles.profileCardHeaderLocation}>
-                  <Icon type="font-awesome-5" name="map-marker-alt" color="#757575" size={height * 0.022} containerStyle={{justifyContent: "center", alignItems: "stretch"}} />
-                  <Text style={styles.profileCardHeaderLocationText}>東京都 清瀬市</Text>
-                </View>
-                <Text style={styles.dseg}>15:45</Text>
-              </View>
-            <LinearGradient
-              colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
-              start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-              style={{ height: height * 0.004}}
-            />
-            <View style={{ marginTop: height * 0.007, paddingLeft: width * 0.0266, flexDirection: "row"}}>
-                  <View>
-                      <Avatar rounded source={require("./assets/profileIcon_3.jpg")} size={width * 0.18666} />
-                      <Badge value="153" containerStyle={{position: "relative", top: -10}} badgeStyle={{backgroundColor: "#ff8ab5"}} />
-                  </View>
-                  <View style={{marginLeft: width * 0.0266, paddingTop: height * 0.02244}}>
-                    <Text style={{fontFamily: "Kazesawa-Bold", fontSize: height * 0.0299}}>天々座 理世</Text>
-                    <Text style={{fontFamily: "Kazesawa-Regular"}}>この私が断罪してくれる！</Text>
-                  </View>
-            </View>
-          </View>
-
-          <View style={styles.profileCard} onLayout={(e) => { setProfileCardSize({"height": e.nativeEvent.layout.height, "width": e.nativeEvent.layout.width}); }}>
-              <View style={styles.profileCardHeader}>
-                <View style={styles.profileCardHeaderLocation}>
-                  <Icon type="font-awesome-5" name="map-marker-alt" color="#757575" size={height * 0.022} containerStyle={{justifyContent: "center", alignItems: "stretch"}} />
-                  <Text style={styles.profileCardHeaderLocationText}>神奈川県 藤沢市</Text>
-                </View>
-                <Text style={styles.dseg}>15:30</Text>
-              </View>
-            <LinearGradient
-              colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
-              start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-              style={{ height: height * 0.004}}
-            />
-            <View style={{ marginTop: height * 0.007, paddingLeft: width * 0.0266, flexDirection: "row"}}>
-                  <View>
-                      <Avatar rounded source={require("./assets/profileIcon_2.jpg")} size={width * 0.18666} />
-                      <Badge value="92" containerStyle={{position: "relative", top: -10}} badgeStyle={{backgroundColor: "#ff8ab5"}} />
-                  </View>
-                  <View style={{marginLeft: width * 0.0266, paddingTop: height * 0.02244}}>
-                    <Text style={{fontFamily: "Kazesawa-Bold", fontSize: height * 0.0299}}>涼風 青葉</Text>
-                    <Text style={{fontFamily: "Kazesawa-Regular"}}>今日も一日がんばるぞい！</Text>
-                  </View>
-            </View>
-          </View>
-
-          <View style={styles.profileCard} onLayout={(e) => { setProfileCardSize({"height": e.nativeEvent.layout.height, "width": e.nativeEvent.layout.width}); }}>
-              <View style={styles.profileCardHeader}>
-                <View style={styles.profileCardHeaderLocation}>
-                  <Icon type="font-awesome-5" name="map-marker-alt" color="#757575" size={height * 0.022} containerStyle={{justifyContent: "center", alignItems: "stretch"}} />
-                  <Text style={styles.profileCardHeaderLocationText}>東京都 町田市</Text>
-                </View>
-                <Text style={styles.dseg}>16:24</Text>
-              </View>
-            <LinearGradient
-              colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
-              start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-              style={{ height: height * 0.004}}
-            />
-            <View style={{ marginTop: height * 0.007, paddingLeft: width * 0.0266, flexDirection: "row"}}>
-                  <View>
-                      <Avatar rounded source={require("./assets/profileIcon_4.png")} size={width * 0.18666} />
-                      <Badge value="6" containerStyle={{position: "relative", top: -10}} badgeStyle={{backgroundColor: "#ff8ab5"}} />
-                  </View>
-                  <View style={{marginLeft: width * 0.0266, paddingTop: height * 0.02244}}>
-                    <Text style={{fontFamily: "Kazesawa-Bold", fontSize: height * 0.0299}}>高橋 周吾</Text>
-                    <Text style={{fontFamily: "Kazesawa-Regular"}}>今日も一日がんばるぞい！</Text>
-                  </View>
-            </View>
-          </View>
-
-          <View style={styles.profileCard} onLayout={(e) => { setProfileCardSize({"height": e.nativeEvent.layout.height, "width": e.nativeEvent.layout.width}); }}>
-              <View style={styles.profileCardHeader}>
-                <View style={styles.profileCardHeaderLocation}>
-                  <Icon type="font-awesome-5" name="map-marker-alt" color="#757575" size={height * 0.022} containerStyle={{justifyContent: "center", alignItems: "stretch"}} />
-                  <Text style={styles.profileCardHeaderLocationText}>東京都 清瀬市</Text>
-                </View>
-                <Text style={styles.dseg}>15:45</Text>
-              </View>
-            <LinearGradient
-              colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
-              start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-              style={{ height: height * 0.004}}
-            />
-            <View style={{ marginTop: height * 0.007, paddingLeft: width * 0.0266, flexDirection: "row"}}>
-                  <View>
-                      <Avatar rounded source={require("./assets/profileIcon_3.jpg")} size={width * 0.18666} />
-                      <Badge value="153" containerStyle={{position: "relative", top: -10}} badgeStyle={{backgroundColor: "#ff8ab5"}} />
-                  </View>
-                  <View style={{marginLeft: width * 0.0266, paddingTop: height * 0.02244}}>
-                    <Text style={{fontFamily: "Kazesawa-Bold", fontSize: height * 0.0299}}>天々座 理世</Text>
-                    <Text style={{fontFamily: "Kazesawa-Regular"}}>この私が断罪してくれる！</Text>
-                  </View>
-            </View>
-          </View>
-
-          <View style={styles.profileCard} onLayout={(e) => { setProfileCardSize({"height": e.nativeEvent.layout.height, "width": e.nativeEvent.layout.width}); }}>
-              <View style={styles.profileCardHeader}>
-                <View style={styles.profileCardHeaderLocation}>
-                  <Icon type="font-awesome-5" name="map-marker-alt" color="#757575" size={height * 0.022} containerStyle={{justifyContent: "center", alignItems: "stretch"}} />
-                  <Text style={styles.profileCardHeaderLocationText}>神奈川県 藤沢市</Text>
-                </View>
-                <Text style={styles.dseg}>15:30</Text>
-              </View>
-            <LinearGradient
-              colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
-              start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-              style={{ height: height * 0.004}}
-            />
-            <View style={{ marginTop: height * 0.007, paddingLeft: width * 0.0266, flexDirection: "row"}}>
-                  <View>
-                      <Avatar rounded source={require("./assets/profileIcon_2.jpg")} size={width * 0.18666} />
-                      <Badge value="92" containerStyle={{position: "relative", top: -10}} badgeStyle={{backgroundColor: "#ff8ab5"}} />
-                  </View>
-                  <View style={{marginLeft: width * 0.0266, paddingTop: height * 0.02244}}>
-                    <Text style={{fontFamily: "Kazesawa-Bold", fontSize: height * 0.0299}}>涼風 青葉</Text>
-                    <Text style={{fontFamily: "Kazesawa-Regular"}}>今日も一日がんばるぞい！</Text>
-                  </View>
-            </View>
-          </View>
+        <View style={styles.body}>
 
           <Text>Height: {height}</Text>
           <Text>Width: {width}</Text>
           <Text>ProfileCardHeight: {profileCardSize.height}</Text>
           <Text>ProfileCardWidth: {profileCardSize.width}</Text>
+          <FlatList
+            data = {userData}
+            renderItem = {({item}) => (
+              <View style={styles.profileCard} onLayout={(e) => { setProfileCardSize({"height": e.nativeEvent.layout.height, "width": e.nativeEvent.layout.width}); }}>
+                  <View style={styles.profileCardHeader}>
+                    <View style={styles.profileCardHeaderLocation}>
+                      <Icon type="font-awesome-5" name="map-marker-alt" color="#757575" size={profileCardSize.height * 0.121212} containerStyle={{justifyContent: "center", alignItems: "stretch"}} />
+                      <Text style={styles.profileCardHeaderLocationText}>{item.location}</Text>
+                    </View>
+                    <Text style={styles.dseg}>{item.datetime}</Text>
+                  </View>
+                <LinearGradient
+                  colors={["#00FFFF", "#17C8FF", "#329BFF", "#4C64FF", "#6536FF", "#8000FF"]}
+                  start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
+                  style={{ height: height * 0.004}}
+                />
+                <View style={styles.profileCardBody}>
+                    <View>
+                        <Avatar rounded source={item.icon} size={width * 0.18666} />
+                        <Badge value="6" containerStyle={{position: "relative", top: height * 0.015 * -1}} badgeStyle={{backgroundColor: "#ff8ab5"}} />
+                    </View>
+                    <View style={styles.profileCardBodyItems}>
+                      <Text style={{fontFamily: "Kazesawa-Bold", fontSize: height * 0.0299}}>{item.name}</Text>
+                      <Text style={{fontFamily: "Kazesawa-Regular", paddingLeft: width * 0.00533, marginBottom: height * 0.00749}}>{item.comment}</Text>
+                        <View style={styles.profileCardBodySNSFlatList}>
+                            <FlatList horizontal = {true} showsHorizontalScrollIndicator={false} fadingEdgeLength={width * 0.19444}
+                              data = {SNS}
+                              renderItem = {({item}) => (
+                                <LinearGradient
+                                  colors={item.gradient}
+                                  start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 0.0}}
+                                  style={styles.profileCardBodySNSFlatListLinearGradient}
+                                >
+                                  <Text style={styles.profileCardBodySNSFlatListText}>{item.name}</Text>
+                                </LinearGradient>
+                              )} 
+                              keyExtractor={SNS => SNS.id}
+                            />
+                        </View>
+                    </View>
+                  </View>
+              </View>
+            )} 
+            keyExtractor={userData => userData.id}
+          />
           <StatusBar style="auto" />
-        {//<Text><Icon type="ionicon" name="cog-outline" color="#4d4d4d" size={34} /></Text>
-        }
-        </ScrollView>
         </View>
       </>
     );
@@ -203,6 +114,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   body: {
+    flex: 1,
     backgroundColor: "#ededed"
   },
   headerText: {
@@ -256,5 +168,38 @@ const styles = StyleSheet.create({
     color: "#757575",
     fontFamily: "DSEG7Classic-Bold",
     textAlign: "right"
+  },
+  profileCardBody: {
+    marginTop: height * 0.007,
+    paddingLeft: width * 0.0266,
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    borderRadius: 5
+  },
+  profileCardBodyItems: {
+    marginLeft: width * 0.0266,
+    paddingTop: height * 0.00449
+  },
+  profileCardBodySNSFlatList: {
+    flexDirection: "row",
+    maxWidth: width * 0.69333,
+    marginLeft: width * 0.04 * -1,
+    marginTop: height * 0.00449
+  },
+  profileCardBodySNSFlatListLinearGradient: {
+    height: height * 0.02998,
+    width: width * 0.21333,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginHorizontal: width * 0.00533
+  },
+  profileCardBodySNSFlatListText: {
+    textAlign: "center",
+    color: "#FFF",
+    flex: 1,
+    paddingTop: height * 0.00168,
+    fontFamily: "Kazesawa-Bold",
+    fontSize: height * 0.02
   }
 });

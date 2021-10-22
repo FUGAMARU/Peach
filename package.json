@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-masked-view/masked-view": "0.2.4",
     "expo": "~42.0.1",
     "expo-background-fetch": "~9.2.2",
     "expo-constants": "~11.0.1",
