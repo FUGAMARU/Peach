@@ -11,7 +11,7 @@ import Settings from './components/Settings';
 const Stack = createStackNavigator();
 const RootStack = () => {
   return (
-      <Stack.Navigator initialRouteName="Top" screenOptions={{headerShown: false}}>
+      <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>
           <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="Top" component={Top} />
           <Stack.Screen name="Settings" component={Settings} options={{headerShown: true}} />
