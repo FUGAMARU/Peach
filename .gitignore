@@ -8,6 +8,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+forFirebaseInitialization.js
 
 # macOS
 .DS_Store

@@ -30,13 +30,11 @@ const Main = (nav) => {
   const userData = [
     {id: "0", name: "おふがし", icon: require("../assets/profileIcon_6.jpg"), comment: "Just Developping the Peach app now", location: "東京都 新宿区", datetime: "19:32", cnt: "46"},
     {id: "1", name: "手塚 朱里", icon: require("../assets/profileIcon_5.jpg"), comment: "失敬失敬", location: "東京都 青梅市", datetime: "18:10", cnt: "3"},
-    {id: "2", name: "高橋 周吾", icon: require("../assets/profileIcon_4.png"), comment: "ふざけたこと抜かしてんじゃねーぞボケ", location: "東京都 町田市", datetime: "14:00", cnt: "15"},
-    {id: "3", name: "天々座 理世", icon: require("../assets/profileIcon_3.jpg"), comment: "この私が断罪してくれる！", location: "東京都 清瀬市", datetime: "13:30", cnt: "130"},
-    {id: "4", name: "涼風 青葉", icon: require("../assets/profileIcon_2.jpg"), comment: "今日も一日がんばるぞい！", location: "神奈川県 藤沢市", datetime: "13:20", cnt: "95"},
-    {id: "5", name: "手塚 朱里", icon: require("../assets/profileIcon_5.jpg"), comment: "失敬失敬", location: "東京都 青梅市", datetime: "18:10", cnt: "3"},
-    {id: "6", name: "高橋 周吾", icon: require("../assets/profileIcon_4.png"), comment: "ふざけたこと抜かしてんじゃねーぞボケ", location: "東京都 町田市", datetime: "14:00", cnt: "15"},
-    {id: "7", name: "天々座 理世", icon: require("../assets/profileIcon_3.jpg"), comment: "この私が断罪してくれる！", location: "東京都 清瀬市", datetime: "13:30", cnt: "130"},
-    {id: "8", name: "涼風 青葉", icon: require("../assets/profileIcon_2.jpg"), comment: "今日も一日がんばるぞい！", location: "神奈川県 藤沢市", datetime: "13:20", cnt: "95"},
+    {id: "2", name: "天々座 理世", icon: require("../assets/profileIcon_3.jpg"), comment: "この私が断罪してくれる！", location: "東京都 清瀬市", datetime: "13:30", cnt: "130"},
+    {id: "3", name: "涼風 青葉", icon: require("../assets/profileIcon_2.jpg"), comment: "今日も一日がんばるぞい！", location: "神奈川県 藤沢市", datetime: "13:20", cnt: "95"},
+    {id: "4", name: "手塚 朱里", icon: require("../assets/profileIcon_5.jpg"), comment: "失敬失敬", location: "東京都 青梅市", datetime: "18:10", cnt: "3"},
+    {id: "5", name: "天々座 理世", icon: require("../assets/profileIcon_3.jpg"), comment: "この私が断罪してくれる！", location: "東京都 清瀬市", datetime: "13:30", cnt: "130"},
+    {id: "6", name: "涼風 青葉", icon: require("../assets/profileIcon_2.jpg"), comment: "今日も一日がんばるぞい！", location: "神奈川県 藤沢市", datetime: "13:20", cnt: "95"},
   ]
 
   const SNS = [
@@ -78,7 +76,7 @@ const Main = (nav) => {
         </View>
         <View style={styles.body}>
 
-        <ImageBackground source={require("../assets/peace.png")} resizeMode="cover" style={styles.backgroundImage}>
+        <ImageBackground source={require("../assets/MainBackgroundImage.png")} resizeMode="cover" style={styles.backgroundImage}>
           <FlatList
             ListEmptyComponent={<Text>すれ違いが発生していません</Text>}
             ListFooterComponent={<>
@@ -114,7 +112,7 @@ const Main = (nav) => {
                       <View style={{flexDirection: "row", justifyContent: "flex-end", width: width * 0.66666}}>
                         <Icon name="logo-instagram" type="ionicon" color="#ce2a51" style={{paddingHorizontal: 3}} />
                         <Icon name="logo-twitter" type="ionicon" color="#1da1f2" style={{paddingHorizontal: 3}} />
-                        <Icon name="logo-youtube" type="ionicon" color="#ff0000" style={{paddingHorizontal: 3}} />
+                        <Icon name="logo-youtube" type="ionicon" color="#f04141" style={{paddingHorizontal: 3}} />
                       </View>
                     </View>
                 </View>
@@ -144,7 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   },
   backgroundImage: {
-		width: "100%"
+    flex: 1
 	},
   headerText: {
     color: "#fff",

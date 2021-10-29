@@ -9,7 +9,7 @@ import { BlurView } from "expo-blur";
 
 const { width, height, scale } = Dimensions.get("window");
 
-const Top = () => {
+const Top = (nav) => {
 	let [fontsLoaded] = useFonts({
 		"Arista-Pro": require("../assets/fonts/aristapro-fat.otf"),
 		"Kazesawa-Bold": require("../assets/fonts/Kazesawa-Bold.ttf"),
@@ -31,7 +31,7 @@ const Top = () => {
 							<Text style={styles.peachText}>PEACH</Text>
 							<Text style={styles.bottomText}>Peeking each other's profiles</Text>
 							<View>
-								<View style={styles.getStartedButtonContainer}><Button title={<Text style={styles.getStartedButtonText}>はじめる</Text>} buttonStyle={styles.getStartedButton} /></View>
+								<View style={styles.getStartedButtonContainer}><Button title={<Text style={styles.getStartedButtonText}>はじめる</Text>} buttonStyle={styles.getStartedButton} onPress={() => nav.navigation.navigate("Register")} /></View>
 								<View style={styles.loginButtonContainer}><Button type="outline" title={<Text style={styles.loginButtonText}>ログイン</Text>} buttonStyle={styles.loginButton} /></View>
 							</View>
 						</View>
