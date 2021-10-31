@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Dimensions, ScrollView, FlatList } from "react-native";
+import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 const Settings = () => {

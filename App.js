@@ -4,9 +4,11 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { useFonts } from "expo-font";
+
 import Main from './components/Main';
-import Top from './components/Top';
-import Register from './components/Register';
+import Top from './components/tops/Top';
+import Register from './components/tops/Register';
 import Settings from './components/Settings';
 
 const Stack = createStackNavigator();
@@ -22,14 +24,29 @@ const RootStack = () => {
 };
 
 const App = () => {
-  return (
-    <>
-      <NavigationContainer>
-        <RootStack />
-      </NavigationContainer>
-      <StatusBar style="auto" />
-    </>
-  );
+  let [fontsLoaded] = useFonts({
+    "Arista-Pro": require("./assets/fonts/aristapro-fat.otf"),
+    "Fredoka-One": require("./assets/fonts/FredokaOne-Regular.otf"),
+    "Kazesawa-Bold": require("./assets/fonts/Kazesawa-Bold.ttf"),
+    "Kazesawa-Extrabold": require("./assets/fonts/Kazesawa-Extrabold.ttf"),
+    "Kazesawa-Light": require("./assets/fonts/Kazesawa-Light.ttf"),
+    "Kazesawa-Regular": require("./assets/fonts/Kazesawa-Regular.ttf"),
+    "DSEG7Classic-Bold": require("./assets/fonts/DSEG7Classic-Bold.ttf"),
+    "OCRAEXT": require("./assets/fonts/OCRAEXT.ttf")
+  });
+
+  if(!fontsLoaded){
+    return null;
+  }else{
+    return (
+      <>
+        <NavigationContainer>
+          <RootStack />
+        </NavigationContainer>
+        <StatusBar style="auto" />
+      </>
+    );
+  }
 }
 
 export default App;

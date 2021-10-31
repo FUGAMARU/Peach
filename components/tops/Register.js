@@ -4,7 +4,7 @@ import { Button, Text, SafeAreaView,TextInput, View } from "react-native";
 import * as firebase from "firebase";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 
-import forFirebaseInitialization from "../forFirebaseInitialization";
+import forFirebaseInitialization from "../../forFirebaseInitialization";
 
 try{
 	firebase.initializeApp(forFirebaseInitialization);
@@ -26,7 +26,7 @@ const Register = () => {
 				ref={recaptchaVerifier}
 				firebaseConfig={firebaseConfig}
 			/>
-			<View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+			<View style={{alignItems: "center", marginTop: 200}}>
 				<Text>お電話番号</Text>
 				<TextInput style={{borderWidth: 1, width: 200, height: 30}} placeholder="+81 90 XXX XXXX" keyboardType="phone-pad" textContentType="telephoneNumber"onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)} />
 				<Button title="送信" onPress={async () => {
@@ -62,11 +62,12 @@ const Register = () => {
 					console.log(firebase.auth().currentUser);
 					firebase.auth().currentUser.linkWithCredential(credential)
 					.then((usercred) => {
-					  const user = usercred.user;
-					  console.log("Account linking success", user);
-					  alert("Successfully registering your password !");
+						const user = usercred.user;
+						console.log("Account linking success", user);
+						alert("Successfully registering your password !");
 					}).catch((error) => {
-					  alert("Account linking error", error);
+						alert("Account linking error", error);
+						console.log(error);
 					});				  
 				}} />
 			</View>
