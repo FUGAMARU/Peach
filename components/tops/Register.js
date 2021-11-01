@@ -3,6 +3,7 @@ import { Button, Text, SafeAreaView,TextInput, View } from "react-native";
 
 import * as firebase from "firebase";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import forFirebaseInitialization from "../../forFirebaseInitialization";
 
@@ -19,6 +20,23 @@ const Register = () => {
 	const [verificationCode, setVerificationCode] = useState();
 	const [password, setPassword] = useState();
 	const firebaseConfig = firebase.apps.length ? firebase.app().options : undefined;
+
+	useEffect(() => {
+		console.log("Checking Login Status...");
+		const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+		return subscriber;
+	}, []);
+
+	const onAuthStateChanged = (user) => {
+		if(user === null){
+			alert("Null");
+			console.log("No login data available.");
+		}else{
+			console.log("===============User Info===============");
+			console.log(user);
+			alert(user.uid);
+		}
+	}
 
 	return(
 		<>

@@ -10,6 +10,7 @@ import Main from './components/Main';
 import Top from './components/tops/Top';
 import Register from './components/tops/Register';
 import Settings from './components/Settings';
+import UploadTest from './components/tops/UploadTest';
 
 const Stack = createStackNavigator();
 const RootStack = () => {
@@ -18,6 +19,7 @@ const RootStack = () => {
           <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="Top" component={Top} />
           <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="UploadTest" component={UploadTest} />
           <Stack.Screen name="Settings" component={Settings} options={{headerShown: true}} />
       </Stack.Navigator>
   );

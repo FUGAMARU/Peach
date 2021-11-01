@@ -71,6 +71,7 @@ const Main = (nav) => {
                                 <Text>ProfileCardWidth: {profileCardSize.width}</Text>
                                 <Button title="Go to TopComponent" onPress={() => nav.navigation.navigate("Top")}></Button>
                                 <Button title="Go to RegisterComponent" onPress={() => nav.navigation.navigate("Register")}></Button>
+                                <Button title="Go to UploadeTestComponent" onPress={() => nav.navigation.navigate("UploadTest")}></Button>
                               </>}
           data = {userData}
           renderItem = {({item}) => (
