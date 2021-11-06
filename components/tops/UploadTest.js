@@ -5,14 +5,6 @@ import * as ImagePicker from 'expo-image-picker';
 
 import * as firebase from "firebase";
 
-import forFirebaseInitialization from "../../forFirebaseInitialization";
-
-try{
-	firebase.initializeApp(forFirebaseInitialization);
-}catch(err){
-	// ignore app already initialized error in snack
-}
-
 const UploadTest = () => {
 	LogBox.ignoreLogs(["Setting a timer"]);
 

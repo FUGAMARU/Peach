@@ -1,16 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import { useFonts } from "expo-font";
 
-import Main from './components/Main';
-import Top from './components/tops/Top';
-import Register from './components/tops/Register';
-import Settings from './components/Settings';
-import UploadTest from './components/tops/UploadTest';
+import Main from "./components/Main";
+import Top from "./components/tops/Top";
+import Register from "./components/tops/Register";
+import Settings from "./components/Settings";
+import UploadTest from "./components/tops/UploadTest";
+
+import * as firebase from "firebase";
+import forFirebaseInitialization from "./forFirebaseInitialization";
+
+if(firebase.apps.length === 0){
+  firebase.initializeApp(forFirebaseInitialization);
+}
 
 const Stack = createStackNavigator();
 const RootStack = () => {

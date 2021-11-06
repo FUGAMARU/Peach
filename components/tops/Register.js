@@ -5,14 +5,6 @@ import * as firebase from "firebase";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import forFirebaseInitialization from "../../forFirebaseInitialization";
-
-try{
-	firebase.initializeApp(forFirebaseInitialization);
-}catch(err){
-	// ignore app already initialized error in snack
-}
-
 const Register = () => {
 	const recaptchaVerifier = useRef(null);
 	const [phoneNumber, setPhoneNumber] = useState();

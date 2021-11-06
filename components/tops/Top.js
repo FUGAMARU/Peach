@@ -6,12 +6,16 @@ import { StatusBar } from "expo-status-bar";
 
 import TopMenu from "./TopMenu";
 import InputPhoneNumber from "./InputPhoneNumber";
+import VerificationCode from "./VerificationCode";
 
 const { width, height, scale } = Dimensions.get("window");
 
 const Top = (nav) => {
 	const fadeAnim = useRef(new Animated.Value(0)).current;
 	const [currentComponent, setCurrentComponent] = useState("TopMenu");
+
+	const [phoneNumber, setPhoneNumber] = useState();
+	const [verificationId, setVerificationId] = useState();
 
 	useEffect(() => {
 		Animated.timing(
@@ -51,6 +55,21 @@ const Top = (nav) => {
 			case "getStarted":
 				changeComponent("InputPhoneNumber");
 				break;
+			case "sendVerificationCode":
+				changeComponent("VerificationCode");
+				break;
+		}
+	}
+
+	const setStateFromIPN = (state, data) =>{
+		switch(state){
+			case "phoneNumber":
+				setPhoneNumber(data);
+				//「07011112222」の形式
+				break;
+			case "verificationId":
+				setVerificationId(data);
+				break;
 		}
 	}
 
@@ -62,7 +81,8 @@ const Top = (nav) => {
 						<View style={styles.backgroundContainerView}>
 							<Animated.View	style={{opacity: fadeAnim}}>
 								{currentComponent === "TopMenu" ? <TopMenu childrenButtonOnPress={childrenButtonOnPress} /> : false}
-								{currentComponent === "InputPhoneNumber" ? <InputPhoneNumber childrenButtonOnPress={childrenButtonOnPress} /> : false}
+								{currentComponent === "InputPhoneNumber" ? <InputPhoneNumber childrenButtonOnPress={childrenButtonOnPress} setStateFromIPN={setStateFromIPN} /> : false}
+								{currentComponent === "VerificationCode" ? <VerificationCode childrenButtonOnPress={childrenButtonOnPress} verificationId={verificationId} /> : false}
 							</Animated.View>
 						</View>
 					</ImageBackground>
