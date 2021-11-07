@@ -58,6 +58,9 @@ const Top = (nav) => {
 			case "sendVerificationCode":
 				changeComponent("VerificationCode");
 				break;
+			case "backToIPN":
+				changeComponent("InputPhoneNumber");
+				break;
 		}
 	}
 

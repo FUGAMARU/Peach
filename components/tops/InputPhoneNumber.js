@@ -15,8 +15,6 @@ const InputPhoneNumber = (props) => {
 	LogBox.ignoreLogs(["Failed prop type", "componentWillReceiveProps"]);
 	const fadeAnim = useRef(new Animated.Value(1)).current;
 	const recaptchaVerifier = useRef(null);
-	const [verificationId, setVerificationId] = useState(null);
-	const [verificationCode, setVerificationCode] = useState();
 	const firebaseConfig = firebase.apps.length ? firebase.app().options : undefined;
 
 	const DialogueRef = useRef();
@@ -79,8 +77,6 @@ const InputPhoneNumber = (props) => {
 				console.log(verificationId);
 				props.setStateFromIPN("verificationId", verificationId);
 				props.childrenButtonOnPress("sendVerificationCode");
-				//setVerificationId(verificationId);
-				//alert("👻認証コードを送信しました");
 			} catch (err) {
 				setdialogTitleBackgroundColor("#f35469");
 				setDialogTitle("エラー");
