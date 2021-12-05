@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, View, Dimensions, ImageBackground, Animated, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View, Dimensions, ImageBackground, Animated, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 //import { SvgXml, SvgUri } from "react-native-svg";
@@ -7,6 +7,7 @@ import { StatusBar } from "expo-status-bar";
 import TopMenu from "./TopMenu";
 import InputPhoneNumber from "./InputPhoneNumber";
 import VerificationCode from "./VerificationCode";
+import InputPassword from "./InputPassword";
 
 const { width, height, scale } = Dimensions.get("window");
 
@@ -37,7 +38,6 @@ const Top = (nav) => {
 			  useNativeDriver: true
 			}
 		  ).start(() => {
-			  //フェードアウトが完了したら
 			setCurrentComponent(nextComponent);
 			Animated.timing(
 			fadeAnim,
@@ -61,6 +61,9 @@ const Top = (nav) => {
 			case "backToIPN":
 				changeComponent("InputPhoneNumber");
 				break;
+			case "completeVerification":
+				changeComponent("InputPassword");
+				break;
 		}
 	}
 
@@ -77,21 +80,24 @@ const Top = (nav) => {
 	}
 
 	return(
-		<>	
-			<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-				<View style={styles.container}>
-					<ImageBackground source={require("../../assets/TopBackgroundImage.jpg")} resizeMode="cover" style={styles.backgroundImage}>
-						<View style={styles.backgroundContainerView}>
-							<Animated.View	style={{opacity: fadeAnim}}>
-								{currentComponent === "TopMenu" ? <TopMenu childrenButtonOnPress={childrenButtonOnPress} /> : false}
-								{currentComponent === "InputPhoneNumber" ? <InputPhoneNumber childrenButtonOnPress={childrenButtonOnPress} setStateFromIPN={setStateFromIPN} /> : false}
-								{currentComponent === "VerificationCode" ? <VerificationCode childrenButtonOnPress={childrenButtonOnPress} verificationId={verificationId} /> : false}
-							</Animated.View>
-						</View>
-					</ImageBackground>
-					<StatusBar style="auto" />
-				</View>
-			</TouchableWithoutFeedback>
+		<>
+			<KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
+				<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+					<View style={styles.container}>
+						<ImageBackground source={require("../../assets/TopBackgroundImage.jpg")} resizeMode="cover" style={styles.backgroundImage}>
+							<View style={styles.backgroundContainerView}>
+								<Animated.View	style={{opacity: fadeAnim}}>
+									{currentComponent === "TopMenu" ? <TopMenu childrenButtonOnPress={childrenButtonOnPress} /> : false}
+									{currentComponent === "InputPhoneNumber" ? <InputPhoneNumber childrenButtonOnPress={childrenButtonOnPress} setStateFromIPN={setStateFromIPN} /> : false}
+									{currentComponent === "VerificationCode" ? <VerificationCode childrenButtonOnPress={childrenButtonOnPress} verificationId={verificationId} /> : false}
+									{currentComponent === "InputPassword" ? <InputPassword childrenButtonOnPress={childrenButtonOnPress} phoneNumber={phoneNumber} /> : false}
+								</Animated.View>
+							</View>
+						</ImageBackground>
+						<StatusBar style="auto" />
+					</View>
+				</TouchableWithoutFeedback>
+			</KeyboardAvoidingView>
 		</>
 	);
 }

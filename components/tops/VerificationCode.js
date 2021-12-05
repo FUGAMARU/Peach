@@ -7,6 +7,7 @@ import * as firebase from "firebase";
 
 const { width, height, scale } = Dimensions.get("window");
 let verificationCode;
+let countdownTimer;
 let subTimer = 30;
 
 const VerificationCode = (props) => {
@@ -19,6 +20,8 @@ const VerificationCode = (props) => {
 	useEffect(() => {
 		subTimer = 30;
 		countDown30Seconds();
+
+		return () => clearInterval(countdownTimer);
 	}, []);
 
 	const walkerToArrow = () => {
@@ -68,7 +71,7 @@ const VerificationCode = (props) => {
 	}
 
 	const countDown30Seconds = () => {
-		let countdownTimer = setInterval(() => {
+		countdownTimer = setInterval(() => {
 			setTimer((prevTimer) => prevTimer - 1);
 			subTimer--;
 			if(subTimer === 0){
@@ -107,8 +110,9 @@ const VerificationCode = (props) => {
 		try {
 			const credential = firebase.auth.PhoneAuthProvider.credential(props.verificationId, verificationCode);
 			await firebase.auth().signInWithCredential(credential);
-			alert("✅認証が完了しました！");
+			//alert("✅認証が完了しました！");
 			console.log(firebase.auth().currentUser);
+			props.childrenButtonOnPress("completeVerification");
 		} catch (err) {
 			Alert.alert("エラー", "SMS認証に失敗しました\n受信した確認コードと入力したコードは一致していますか？",
 				[{ text: "OK", onPress: () => walkerToArrow()}]
@@ -128,7 +132,7 @@ const VerificationCode = (props) => {
 				<Text style={styles.titleText}>SMS認証</Text>
 				<Text style={styles.instructionText}>受信した確認コードを入力してください</Text>
 				<View style={{flexDirection: "row", alignItems:"center"}}>
-				<TextInput style={styles.verificationCode} keyboardType="number-pad" returnKeyType="done" maxLength={6} placeholder="123456" onChangeText={(text) => setVerificationCode(text)} underlineColor="#ff8ab5" selectionColor="#ff8ab5" theme={phoneNumberTextInputTheme} />
+					<TextInput style={styles.verificationCode} keyboardType="number-pad" returnKeyType="done" maxLength={6} placeholder="123456" onChangeText={(text) => setVerificationCode(text)} underlineColor="#ff8ab5" selectionColor="#ff8ab5" theme={phoneNumberTextInputTheme} />
 				</View>
 				<View style={styles.footerButtonContainer}>
 					<Animated.View	style={{opacity: fadeAnim2}}>
