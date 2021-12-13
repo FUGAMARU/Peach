@@ -58,6 +58,7 @@ const InputPassword = (props) => {
 						const user = usercred.user;
 						console.log("Account linking success", user);
 						alert("パスワードの登録が完了しました!");
+						//const uid = user.uid; 
 					}).catch((error) => {
 						Alert.alert("エラー", `エラーが発生しました\n${error}`);
 					});

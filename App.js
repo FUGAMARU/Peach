@@ -11,6 +11,7 @@ import Top from "./components/tops/Top";
 import Register from "./components/tops/Register";
 import Settings from "./components/Settings";
 import UploadTest from "./components/tops/UploadTest";
+import TestFirestore from "./components/tops/TestFirestore";
 
 import * as firebase from "firebase";
 import forFirebaseInitialization from "./forFirebaseInitialization";
@@ -27,6 +28,7 @@ const RootStack = () => {
           <Stack.Screen name="Top" component={Top} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="UploadTest" component={UploadTest} />
+          <Stack.Screen name="TestFirestore" component={TestFirestore} />
           <Stack.Screen name="Settings" component={Settings} options={{headerShown: true}} />
       </Stack.Navigator>
   );
